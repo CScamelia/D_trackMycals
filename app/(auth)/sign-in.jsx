@@ -30,7 +30,7 @@ const SignIn = () => {
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
         console.log('Success: User signed in successfully');
-        router.push('/profile');
+        router.replace('/profile');
       })
       .catch((error) => {
         console.log('Error:', error.message);
