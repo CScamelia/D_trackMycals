@@ -15,6 +15,7 @@
 
 import { Redirect, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { auth } from '../../firebase';
 
 import { Loader } from "../../components";
 // import { useGlobalContext } from "../../context/GlobalProvider";
@@ -23,8 +24,9 @@ const AuthLayout = () => {
   // const { loading, isLogged } = useGlobalContext();
   const loading = false;
   const isLogged = false;
+  const userDetails = auth.currentUser;
 
-  if (!loading && isLogged) return <Redirect href="/home" />;
+  if (!loading && userDetails) return <Redirect href="/home" />;
 
   return (
     <>

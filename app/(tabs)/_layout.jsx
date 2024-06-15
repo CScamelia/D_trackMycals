@@ -1,6 +1,7 @@
 import {  Text, View,Image } from 'react-native'
 import { Tabs, Redirect } from 'expo-router'
 import {icons} from '../../constants';
+import { auth } from '../../firebase';
 
 
 const TabIcon = ({ icon, color, name, focused }) => {
@@ -26,8 +27,9 @@ const TabLayout = () => {
   // const { loading, isLogged } = useGlobalContext();
   const loading = false;
   const isLogged = false;
+  const userDetails = auth.currentUser;
 
-  if (!loading && !isLogged) return <Redirect href="/sign-in" />;
+  if (!loading && !userDetails) return <Redirect href="/sign-in" />;
 
   return (
     <>
@@ -107,8 +109,8 @@ const TabLayout = () => {
         />
       </Tabs>
 
-      <Loader isLoading={loading} />
-      <StatusBar backgroundColor="#161622" style="light" />
+      {/* <Loader isLoading={loading} /> */}
+      {/* <StatusBar backgroundColor="#161622" style="light" /> */}
     </>
   );
 };

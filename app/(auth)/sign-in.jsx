@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, ScrollView, Dimensions, Alert, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Link, useRouter, useNavigation } from 'expo-router';
+// import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, ScrollView, Dimensions, Alert, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { images } from '../../constants';
 import { FormField } from '../../components';
 
-const auth = getAuth(); // Initialize Firebase Auth
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getDoc, doc } from 'firebase/firestore';
+import { auth, db } from '../../firebase'
 
 const SignIn = () => {
   const [isSubmitting, setSubmitting] = useState(false);
@@ -17,6 +18,7 @@ const SignIn = () => {
   const router = useRouter();
 
   const handleSignIn = () => {
+        // router.push('/profile');
     const { email, password } = form;
     if (email === '' || password === '') {
       Alert.alert('Error', 'Please fill in all fields');
@@ -28,7 +30,7 @@ const SignIn = () => {
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
         console.log('Success: User signed in successfully');
-        router.replace('/home');
+        router.push('/profile');
       })
       .catch((error) => {
         console.log('Error:', error.message);
@@ -73,7 +75,7 @@ const SignIn = () => {
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity 
-              onPress={handleSignIn}
+              onPress={() => handleSignIn()}
               style={styles.button}
             >
               <Text style={styles.buttonText}>Login</Text>

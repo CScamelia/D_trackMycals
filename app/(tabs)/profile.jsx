@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView } from "react-native-gesture-handler";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView, SafeAreaView } from "react-native";
+// import { SafeAreaView } from "react-native-safe-area-context";
+// import { ScrollView } from "react-native-gesture-handler";
 
 const Profile = () => {
   const [form, setForm] = useState({
